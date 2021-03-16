@@ -1,44 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de número complejos</title>
+<!DOCTYPE html><html lang="en"><head>
+  <script src="p5.js"></script>
+  <script src="p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <title>Calculadora de complejos</title>
 </head>
 
 <body>
+  <p>Coordenadas:</p>
+  <input type="radio" name="coordenadas" id="cartesianas" checked="">
+  <label for="cartesianas">Cartesianas</label><br>
+  <input type="radio" name="coordenadas" id="polares">
+  <label for="polares">Polares</label><br>
 
-    HOLA MUNDO <br>
-    <p>Coordenadas:</p>
-    <input type="radio" name="coordenadas" id="cartesianas" checked />
-    <label for="cartesianas">Cartesianas</label><br />
-    <input type="radio" name="coordenadas" id="polares" />
-    <label for="polares">Polares</label><br />
+  <input type="number" class="dato" id="x1" value="0">
+  <span class="estructura"></span><br>
+  <input type="number" class="dato" id="x2" value="0">
+  <span class="estructura"></span><br>
 
-    <input type="number" class="dato" id="x1" value="0" />
-    <span class="estructura"></span><br />
-    <input type="number" class="dato" id="x2" value="0" />
-    <span class="estructura"></span><br />
+  <input type="button" id="nuevo" value="Nuevo valor">
 
-    <input type="button" id="nuevo" value="Nuevo valor" />
+  <p id="coords"></p>
+  <input type="button" id="convertir" value=""><br>
+  
+  <input type="checkbox" class="operacion" id="o_sumar">
+  <label for="o_sumar">Sumar: Z1+Z2+Z3+...+Zn</label><br>
+  <input type="checkbox" class="operacion" id="o_restar">
+  <label for="o_restar">Restar: Z1-Z2-Z3-...-Zn</label><br>
+  <input type="checkbox" class="operacion" id="o_multiplicar">
+  <label for="o_multiplicar">Multiplicar: Z1*Z2*Z3*...*Zn</label><br>
+  <input type="checkbox" class="operacion" id="o_dividir">
+  <label for="o_dividir">Dividir: (((Z1/Z2)/Z3)/...)/Zn</label><br>
+  <input type="button" id="operar" value="Operar" onclick="operar()">
+  <p id="resultado"></p>
+    
+  <p>i^<input type="number" id="exponente" value="1" step="1">=<span id="exp_res"></span></p>
+  <script src="sketch.js"></script>
 
-    <p id="coords"></p>
-    <input type="button" id="convertir" value="" /><br />
 
-    <input type="checkbox" class="operacion" id="o_sumar" />
-    <label for="o_sumar">Sumar</label><br />
-    <input type="checkbox" class="operacion" id="o_restar" />
-    <label for="o_restar">Restar</label><br />
-    <input type="checkbox" class="operacion" id="o_multiplicar" />
-    <label for="o_multiplicar">Multiplicar</label><br />
-    <input type="checkbox" class="operacion" id="o_dividir" />
-    <label for="o_dividir">Dividir</label><br />
-    <input type="button" id="operar" value="Operar" onclick="operar()" />
-    <p id="resultado"></p>
-
-    <p>i^<input type="number" id="exponente" value="1" step="1" />=<span id="exp_res"></span></p>
-    <script src="index.js"></script>
-</body>
-
-</html>
+</body></html>
