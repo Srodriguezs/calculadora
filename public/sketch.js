@@ -14,6 +14,9 @@ convertir.addEventListener("click", convertir_datos);
 let datos = document.getElementsByClassName("dato");
 //Lista de coordenadas registradas
 let coords = [];
+//Gráfica
+let lista_de_coords = [];
+let m = -1;
 //Texto para señalar los datos que va a ingresar
 let estructura = document.getElementsByClassName("estructura");
 actualizar_datos();
@@ -22,14 +25,33 @@ let operacion = document.getElementsByClassName("operacion");
 //Respuesta de i^n
 let i_exp_res = document.getElementById("exponente");
 i_exp_res.addEventListener("change", exponente);
-exponente();
 
 //test
 //coords = [[-3, 2, true]];
-//coords = [[1, 1, true],[-1, -1, true]];
-//coords = [[1, 1, true],[-3, 2, true],[-1, -1, true]];
+coords = [[1, 1, true],[-1, -1, true]];
+//coords = [[1, 1, true], [-3, 2, true], [-1, -1, true]];
 //convertir_datos();
+//actualizar_datos();
+exponente();
 
+function mover_datos(v) {
+  if (v > 0) {
+    v--;
+    if (v > 0)
+      [coords[v], coords[v - 1]] = [coords[v - 1], coords[v]];
+  } else {
+    v = abs(v);
+    v--;
+    if (v < coords.length - 1)
+      [coords[v], coords[v + 1]] = [coords[v + 1], coords[v]];
+  }
+  actualizar_datos();
+}
+
+function eliminar_datos(v) {
+  coords.splice(v, 1);
+  actualizar_datos();
+}
 //Actualiza la información que aparece en pantalla
 function actualizar_datos() {
   //Informa como se registrará el siguente dato
@@ -46,6 +68,9 @@ function actualizar_datos() {
     coords_texto += "cartesianas:<br>";
     let con = 0;
     for (let i = 0; i < coords.length; i++) {
+      coords_texto += '<input type="button" onclick="mover_datos(' + (i + 1) + ')" value="&#8593;" />';
+      coords_texto += '<input type="button" onclick="mover_datos(' + (-i - 1) + ')" value="&#8595;" />';
+      coords_texto += '<input type="button" onclick="eliminar_datos(' + i + ')" value="x" />';
       coords_texto += '<input type="checkbox" onclick="datos_calcular()" class="check" ';
       if (coords[i][2]) {
         con++;
@@ -72,6 +97,7 @@ function actualizar_datos() {
   document.getElementById("coords").innerHTML = coords_texto;
   //Texto del bóton
   convertir.value = coords_cartesianas ? "Convertir a polares" : "Convertir a cartesianas";
+  lista_de_coords = [];
 }
 
 //Registra un nuevo dato y convirte los existentes a el nuevo sistema de coordenadas
@@ -118,11 +144,11 @@ function convertir_datos() {
 
 //Cambia el valor de los datos a calcular
 function datos_calcular() {
-  lista_de_coords = [];
   let checkbox = document.getElementsByClassName("check");
   for (let i = 0; i < coords.length; i++) {
     coords[i][2] = checkbox[i].checked;
   }
+  actualizar_datos();
 }
 
 //Convirte los datos registrados de coordenadas cartesianas a polares
@@ -228,6 +254,17 @@ function calcular_complejo(x, y) {
 
 //Realizar operaciones
 function operar() {
+  let operar_ = false;
+  for (let i = 0; i < coords.length; i++) {
+    if(coords[i][2]) {
+      operar_ = true;
+      break;
+    }
+  }
+  if(!operar_) {
+    document.getElementById("resultado").innerHTML = "";
+    return;
+  }
   let res = document.getElementById("resultado");
   res.innerHTML = "";
   let coords_polares = !coords_cartesianas;
@@ -368,7 +405,7 @@ function exponente() {
       } else {
         let conversion = cartesiana_polar(coords[i][0], coords[i][1]);
         let calculo = [];
-        calculo[0] = pow(conversion[0], numero_del_exponente);
+        calculo[0] = Math.pow(conversion[0], numero_del_exponente);
         calculo[1] = ((conversion[1] * numero_del_exponente) % 360);
         conversion = polar_cartesiana(calculo[0], calculo[1]);
         document.getElementById("exp_res").innerHTML += "Z" + con + ":(" + conversion[0] + ") + (" + conversion[1] + ")i<br>";
@@ -391,7 +428,7 @@ function exponente() {
         let conversion = cartesiana_polar(coords[i][0], coords[i][1]);
         let calculo = [];
         for (let j = 0; j < numero_del_exponente; j++) {
-          calculo[0] = pow(conversion[0], 1 / numero_del_exponente);
+          calculo[0] = Math.pow(conversion[0], 1 / numero_del_exponente);
           calculo[1] = (conversion[1] + 2 * j * 180) / numero_del_exponente;
           let conversion2 = polar_cartesiana(calculo[0], calculo[1]);
           document.getElementById("exp_res").innerHTML += "Z" + con + "_" + (j + 1) + ": (" + conversion2[0] + ") + (" + conversion2[1] + ")i<br>";
@@ -406,13 +443,10 @@ function exponente() {
 let w;
 
 function setup() {
-  createCanvas(1024, 1024);
+  createCanvas(900, 900);
   textAlign(CENTER, CENTER);
   w = min(width, height);
 }
-
-let lista_de_coords = [];
-let m = -1;
 
 function draw() {
   if (lista_de_coords.length === 0) {
@@ -479,8 +513,8 @@ function draw() {
       stroke(255);
       line(x, 0, x, y);
       line(0, y, x, y);
-      text(nf(lista_de_coords[i][0],1,2), x / 2, y);
-      text(nf(lista_de_coords[i][1],1,2)+"i", x, y / 2);
+      text(nf(lista_de_coords[i][0], 1, 2), x / 2, y);
+      text(nf(lista_de_coords[i][1], 1, 2) + "i", x, y / 2);
     } else {
       let conversion = cartesiana_polar(lista_de_coords[i][0], lista_de_coords[i][1]);
       noFill();
@@ -488,14 +522,14 @@ function draw() {
       let ang = map(conversion[1], 0, 180, 0, w / 2 - w / 16);
       arc(0, 0, ang, ang, -conversion[1] * PI / 180, 0);
       line(0, 0, x, y);
-      
+
       translate(x / 3, y / 3);
-      text(nf(conversion[1],1,2)+"°", 0, 0);
+      text(nf(conversion[1], 1, 2) + "°", 0, 0);
       translate(-x / 3, -y / 3);
-      
-      translate(2*x / 3, 2*y / 3);
-      text(nf(conversion[0],1,2), 0, 0);
-      translate(-2*x / 3, -2*y / 3);
+
+      translate(2 * x / 3, 2 * y / 3);
+      text(nf(conversion[0], 1, 2), 0, 0);
+      translate(-2 * x / 3, -2 * y / 3);
     }
     fill(255);
     ellipse(x, y, 16, 16);
