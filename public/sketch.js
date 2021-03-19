@@ -84,6 +84,9 @@ function actualizar_datos() {
     coords_texto += "polares:<br>";
     let con = 0;
     for (let i = 0; i < coords.length; i++) {
+      coords_texto += '<input type="button" onclick="mover_datos(' + (i + 1) + ')" value="&#8593;" />';
+      coords_texto += '<input type="button" onclick="mover_datos(' + (-i - 1) + ')" value="&#8595;" />';
+      coords_texto += '<input type="button" onclick="eliminar_datos(' + i + ')" value="x" />';
       coords_texto += '<input type="checkbox" onclick="datos_calcular()" class="check" ';
       if (coords[i][2]) {
         con++;
