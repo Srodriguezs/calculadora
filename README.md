@@ -3,7 +3,8 @@ Proyecto de clase, de calculador de números complejos y permite operaciones bá
 
 ### Enlace 
 - pagina inicial
- ![Alt text](https://calculadora-matematicas.herokuapp.com/)
+[Url de la calculadora online](https://calculadora-matematicas.herokuapp.com)
+ 
 
 ### Capturas
 - pagina inicial
