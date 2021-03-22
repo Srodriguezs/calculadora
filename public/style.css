@@ -1,7 +1,33 @@
-html, body {
-  margin: 0;
-  padding: 0;
+html,
+body {
+    margin: 0;
+    padding: 0;
 }
+
+.container {
+    width: 100%;
+    padding: 5%;
+}
+
+.sub-container,
 canvas {
-  display: block;
+    width: 390px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 1px 8px 20px grey;
+    position: sticky;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+main {
+    width: 50% !important;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-left: 800px;
+    margin-bottom: 50px;
 }
