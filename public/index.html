@@ -2,106 +2,109 @@
 <html lang="en">
 
 <head>
-    <script src="p5.js"></script>
-    <script src="p5.sound.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
-    <title>Calculadora de complejos</title>
+    <title>MATEMATICA DISCRETA</title>
 </head>
 
 
-<body class="container row">
+<body class="container  row m-auto">
+    <h3 class="text-center">CONJETURA MESAROSA:</h3>
+    <p>
+        <hr>
+        <b>
+            Se considera que la conjetura Mesarosa el cual es:
+        </b>
+        <br> Si sumamos los dígitos de un número primo nunca da como resultado un múltiplo de 3 mayor que 3.Dicho esto se cumple para todos los casos y se convierte en una regla generalmente aceptada
+    </p>
+    <div class="col-6">
+        <div class="sub-container ">
 
-    <div class="sub-container ">
-        <h3 class="text-center">Coordenadas:</h3>
-        <div class="row">
 
-            <div class="w-50">
-                <input type="radio" name="coordenadas" id="cartesianas" class="form-check-input" type="radio" checked>
-                <label class="form-check-label" for="cartesianas">
-              Cartesianas
-            </label>
+            <!-- <form class=" needs-validation" novalidate> -->
+            <div class="row justify-content-center p-2">
+                Ingrese dos numeros primos para operar:
+                <br>
+                <br>
+                <div class="col-6 ">
+                    <input class="form-control w-100" type="number" class="dato" id="x1" placeholder="min primo" required>
+                    <div class="invalid-feedback">
+                        Numero no valido o no primo
+                    </div>
+                    <!-- <span class="estructura w-50"></span><br> -->
+
+                </div>
+                <div class="col-6  ">
+                    <input class="form-control w-100" type="number" class="dato" placeholder="max primo" id="x2" required>
+
+                    <div class="invalid-feedback">
+                        Numero no valido o no primo
+                    </div>
+                    <!-- <span class="estructura w-50"></span><br> -->
+                </div>
+                <div id="iguales" class=" text-danger ">
+                    El campo #1 no puede ser mayor o igual al campo #2
+                </div>
+
+                <div id="mayor" class=" text-danger ">
+                    La diferencia entre los numeros debe ser menor a 100
+                </div>
+
+                <br>
+                <br>
+
+                <button class="w-50 pt-2 btn btn-secondary" type="button" onclick="operar()">CALCULAR</button>
+
             </div>
-            <div class="w-50">
-                <input class="form-check-input" type="radio" name="coordenadas" id="polares">
-                <label class="form-check-label" for="polares">Polares</label>
-            </div>
+            <!-- </form> -->
+
+
 
 
         </div>
-        <br>
-        <div class="row ">
-            <div class="p-1 row m-0">
-                <input class="form-control w-50" type="number" class="dato" id="x1" value="0">
-                <span class="estructura w-50"></span><br>
+        <div class="m-5">
+            <p class="m-0">Samuel Rodríguez Salamanca </p>
+            <p class="m-0">Juan David Merchán </p>
+            <p class="m-0">Miguel Salgado </p>
+            <p class="m-0">Adduvar Sánchez </p>
 
-            </div>
-            <div class="p-1 row m-0">
-                <input class="form-control w-50" type="number" class="dato" id="x2" value="0">
-                <span class="estructura w-50"></span><br>
-            </div>
-            <input class="btn btn-secondary m-auto mt-3 w-50" type="button" id="nuevo" value="Nuevo valor">
+
+
+            <strong> Grupo: <small>3012R</small></strong>
         </div>
-        <div class="row">
-            <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Default checkbox
-          </label> -->
-            <p id="coords"></p>
-            <input type="button" id="convertir" class="btn btn-secondary m-auto mt-3 w-50" value=""><br>
-            <div>
 
-                <input type="checkbox" class="form-check-input operacion" id="o_sumar">
-                <label class="form-check-label" for="o_sumar">Sumar: Z1+Z2+Z3+...+Zn</label>
+    </div>
+    <div class="col-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">primo</th>
+                    <th scope="col">Suma decimales</th>
+                    <th scope="col">multiplo de 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="3">
+                        <div class="alert alert-dark text-center" role="alert">
+                            sin resultados
+                        </div>
+                    </th>
 
-            </div>
-
-
-            <br>
-            <div>
-                <input class="form-check-input operacion" type="checkbox" class="operacion" id="o_restar">
-                <label class="form-check-label" for="o_restar">Restar: Z1-Z2-Z3-...-Zn</label><br>
-
-            </div>
-            <div>
-                <input class="form-check-input operacion" type="checkbox" class="operacion" id="o_multiplicar">
-                <label class="form-check-label" for="o_multiplicar">Multiplicar: Z1*Z2*Z3*...*Zn</label><br>
-
-            </div>
-            <div>
-                <input class="form-check-input operacion" type="checkbox" class="operacion" id="o_dividir">
-                <label class="form-check-label" for="o_dividir">Dividir: (((Z1/Z2)/Z3)/...)/Zn</label>
-
-            </div>
-            <br>
-            <input type="button" class="btn btn-secondary m-auto mt-3 w-50" id="operar" value="Operar" onclick="operar()">
-            <p id="resultado"></p>
-
-            <p>i^<input class="form-control" type="number" id="exponente" value="1" step="1">=
-
-
-                <span id="exp_res"></span></p>
-
-
-        </div>
+            </tbody>
+        </table>
 
 
     </div>
 
 
 
+
 </body>
-<footer>
-    <p class="m-0">Samuel Rodríguez Salamanca <small> cc: 1233893646</small></p>
 
-    <p class="m-0">Robinson Rojas Lopez
-        <small> cc: 1013692948</small>
-
-    </p>
-    <strong> Grupo: <small>30122</small></strong>
-</footer>
-
-<script src="sketch.js"></script>
+<script src="jquery.js"></script>
+<script src="principal.js"></script>
 
 </html>

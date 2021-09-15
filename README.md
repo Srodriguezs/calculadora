@@ -1,9 +1,9 @@
 # calculadora
-Proyecto de clase, de calculador de números complejos y permite operaciones básicas.
+Proyecto de clase, conjetura .
 
 ### Enlace 
 - pagina inicial
-[Url de la calculadora online](https://calculadora-matematicas.herokuapp.com)
+[Url de la calculadora online](https://conjetura-matematicas.herokuapp.com)
  
 
 ### Capturas
