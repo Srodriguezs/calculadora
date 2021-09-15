@@ -30,7 +30,7 @@ function operar() {
         return diferentDiv.style.display = 'block';
     }
 
-    if ((Number(max.value) - Number(min.value)) > 100) {
+    if ((Number(max.value) - Number(min.value)) > 1000) {
         return mayorDiv.style.display = 'block';
     }
 
