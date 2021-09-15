@@ -3,7 +3,7 @@ Proyecto de clase, conjetura .
 
 ### Enlace 
 - pagina inicial
-[Url de la calculadora online](https://conjetura-matematicas.herokuapp.com)
+[Url de la conjetura online](https://conjetura-matematicas.herokuapp.com)
  
 
 ### Capturas
